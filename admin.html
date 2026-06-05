@@ -3,170 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lead CRM — Glisson Tree Service</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <title>CRM — Glisson Tree Service</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="admin.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a3d28'/><text y='24' x='5' font-size='22'>🌳</text></svg>" />
 </head>
 <body>
-<div id="loadingBar" style="display:none;position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1a3d28,#52a06c);z-index:9999;animation:loadpulse 1s infinite"></div>
-<style>@keyframes loadpulse{0%{opacity:1}50%{opacity:0.4}100%{opacity:1}}</style>
 
-<div class="crm">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="sidebar-logo-mark">🌳</div>
-      <div>
-        <span class="sidebar-biz">Glisson Tree Service</span>
-        <span class="sidebar-sub">Lead CRM</span>
-      </div>
+<!-- ═══════════════════════════════════
+     LOGIN SCREEN
+════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-icon">🌳</div>
+      <h1>Glisson Tree Service</h1>
+      <p>CRM Dashboard</p>
     </div>
-
-    <p class="sidebar-section-label">Pipeline Stats</p>
-    <div class="sidebar-mini-stats">
-      <div>
-        <div class="mini-stat-num" id="statTotal">—</div>
-        <div class="mini-stat-label">Total Leads</div>
-      </div>
-      <div>
-        <div class="mini-stat-num" id="statBookRate">—</div>
-        <div class="mini-stat-label">Booking Rate</div>
-      </div>
+    <div class="login-field">
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" />
     </div>
-
-    <div class="sidebar-divider"></div>
-
-    <p class="sidebar-section-label">Pipeline Value</p>
-    <div class="sidebar-mini-stats">
-      <div>
-        <div class="mini-stat-num" id="statPipeline">—</div>
-        <div class="mini-stat-label">Active Pipeline</div>
-      </div>
-      <div>
-        <div class="mini-stat-num" id="statAvgJob">—</div>
-        <div class="mini-stat-label">Avg Booked Job</div>
-      </div>
-    </div>
-
-    <div class="sidebar-divider"></div>
-
-    <div class="sidebar-footer">
-      <button class="sidebar-refresh-btn" id="refreshBtn">↻ Refresh Leads</button>
-      <a href="index.html" class="sidebar-website-btn">← View Website</a>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="crm-main">
-
-    <!-- Header -->
-    <header class="crm-header">
-      <div>
-        <h1 class="crm-title">Lead Pipeline</h1>
-      </div>
-      <div class="crm-header-right">
-        <div class="crm-search">
-          <span class="crm-search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search name, phone, or service…" autocomplete="off" />
-        </div>
-        <button class="btn-primary-crm" id="addLeadBtn">＋ Add Lead</button>
-      </div>
-    </header>
-
-    <!-- Service Filters -->
-    <div class="crm-filters">
-      <button class="filter-chip active" data-filter="all">All Services</button>
-      <button class="filter-chip" data-filter="tree removal">Tree Removal</button>
-      <button class="filter-chip" data-filter="trimming">Trimming</button>
-      <button class="filter-chip" data-filter="emergency">Emergency</button>
-      <button class="filter-chip" data-filter="stump">Stump Grinding</button>
-      <button class="filter-chip" data-filter="lot clearing">Lot Clearing</button>
-    </div>
-
-    <!-- Pipeline Board (columns injected by JS) -->
-    <div class="pipeline-board" id="pipelineBoard"></div>
-
-  </main>
+    <button class="login-btn" id="loginBtn">Sign In →</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
 </div>
 
-<!-- DETAIL PANEL -->
+<!-- ═══════════════════════════════════
+     DASHBOARD
+════════════════════════════════════ -->
+<div id="dashboard">
+
+  <!-- Loading bar -->
+  <div id="loadingBar"></div>
+
+  <!-- HEADER -->
+  <header class="crm-header">
+    <div class="crm-brand">
+      <span class="crm-brand-icon">🌳</span>
+      <span class="crm-brand-name">Glisson CRM</span>
+    </div>
+    <div class="crm-header-right">
+      <div class="crm-search-wrap">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search…" autocomplete="off" />
+      </div>
+      <button class="btn-add" id="addLeadBtn">＋ Lead</button>
+      <button class="btn-refresh" id="refreshBtn" title="Refresh">↻</button>
+    </div>
+  </header>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num" id="statTotal">—</div>
+      <div class="stat-lbl">Total</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="statPipeline">—</div>
+      <div class="stat-lbl">Pipeline</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="statBookRate">—</div>
+      <div class="stat-lbl">Booking Rate</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="statAvgJob">—</div>
+      <div class="stat-lbl">Avg Job</div>
+    </div>
+  </div>
+
+  <!-- STAGE TABS (mobile) / hidden on desktop -->
+  <div class="stage-tabs" id="stageTabs"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="crm-body">
+
+    <!-- SIDEBAR (desktop only) -->
+    <aside class="sidebar">
+      <div class="sidebar-section-label">Filter by Service</div>
+      <div class="service-filters">
+        <button class="filter-chip active" data-filter="all">All Services</button>
+        <button class="filter-chip" data-filter="tree removal">🌳 Tree Removal</button>
+        <button class="filter-chip" data-filter="trimming">✂️ Trimming</button>
+        <button class="filter-chip" data-filter="emergency">🚨 Emergency</button>
+        <button class="filter-chip" data-filter="stump">🪵 Stump Grinding</button>
+        <button class="filter-chip" data-filter="lot clearing">🚜 Lot Clearing</button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <a href="index.html" class="sidebar-website-link">← View Website</a>
+      <button class="sidebar-logout" id="logoutBtn">Sign Out</button>
+    </aside>
+
+    <!-- PIPELINE BOARD (desktop) / CARD LIST (mobile) -->
+    <div class="pipeline-wrap">
+
+      <!-- Mobile service filter chips -->
+      <div class="mobile-filters">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="tree removal">🌳 Removal</button>
+        <button class="filter-chip" data-filter="trimming">✂️ Trimming</button>
+        <button class="filter-chip" data-filter="emergency">🚨 Emergency</button>
+        <button class="filter-chip" data-filter="stump">🪵 Stump</button>
+        <button class="filter-chip" data-filter="lot clearing">🚜 Clearing</button>
+      </div>
+
+      <!-- Board: columns injected by JS on desktop, single list on mobile -->
+      <div class="pipeline-board" id="pipelineBoard"></div>
+    </div>
+
+  </div><!-- .crm-body -->
+
+  <!-- Mobile FAB -->
+  <button class="fab" id="fabAddBtn">＋</button>
+
+</div><!-- #dashboard -->
+
+<!-- ═══════════════════════════════════
+     DETAIL PANEL
+════════════════════════════════════ -->
+<div class="detail-backdrop" id="detailBackdrop"></div>
 <div class="detail-panel" id="detailPanel">
   <div class="detail-header">
-    <h2 class="detail-name" id="detailName">—</h2>
+    <div>
+      <div class="detail-name" id="detailName">—</div>
+      <div class="detail-service" id="detailService">—</div>
+    </div>
     <button class="detail-close" id="closeDetail">✕</button>
   </div>
 
-  <div class="detail-service" id="detailService">—</div>
+  <div class="detail-body">
 
-  <div class="detail-section">
-    <div class="detail-row">
-      <span class="detail-label">📞 Phone</span>
-      <a class="detail-value detail-phone" id="detailPhone" href="#">—</a>
+    <div class="detail-section">
+      <a class="detail-call-btn" id="detailCallBtn" href="#">📞 Call Now</a>
     </div>
-    <div class="detail-row">
-      <span class="detail-label">✉️ Email</span>
-      <span class="detail-value" id="detailEmail">—</span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">📍 Source</span>
-      <span class="detail-value" id="detailSource">—</span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">📅 Date</span>
-      <span class="detail-value" id="detailDate">—</span>
-    </div>
-    <div class="detail-row detail-row-block">
-      <span class="detail-label">💬 Message</span>
-      <span class="detail-value detail-message" id="detailMessage">—</span>
-    </div>
-  </div>
 
-  <div class="detail-section">
-    <div class="detail-section-title">Pipeline Stage</div>
-    <div class="stage-btn-group">
-      <button class="stage-btn" data-stage="new">New Lead</button>
-      <button class="stage-btn" data-stage="contacted">Contacted</button>
-      <button class="stage-btn" data-stage="scheduled">Est. Scheduled</button>
-      <button class="stage-btn" data-stage="quoted">Estimate Given</button>
-      <button class="stage-btn" data-stage="booked">Job Booked</button>
-      <button class="stage-btn" data-stage="completed">Completed</button>
+    <div class="detail-section">
+      <div class="detail-row"><span class="dl">Phone</span><span class="dv" id="detailPhone">—</span></div>
+      <div class="detail-row"><span class="dl">Email</span><span class="dv" id="detailEmail">—</span></div>
+      <div class="detail-row"><span class="dl">Source</span><span class="dv" id="detailSource">—</span></div>
+      <div class="detail-row"><span class="dl">Date</span><span class="dv" id="detailDate">—</span></div>
+      <div class="detail-row detail-row-block"><span class="dl">Message</span><span class="dv dv-msg" id="detailMessage">—</span></div>
     </div>
-  </div>
 
-  <div class="detail-section">
-    <div class="detail-section-title">Priority</div>
-    <div class="priority-btn-group">
-      <button class="priority-btn" data-priority="normal">Normal</button>
-      <button class="priority-btn" data-priority="high">🟠 High</button>
-      <button class="priority-btn" data-priority="urgent">🔴 Urgent</button>
+    <div class="detail-section">
+      <div class="detail-section-title">Move to Stage</div>
+      <div class="stage-btn-group" id="stageBtnGroup">
+        <button class="stage-btn" data-stage="new">New Lead</button>
+        <button class="stage-btn" data-stage="contacted">Contacted</button>
+        <button class="stage-btn" data-stage="scheduled">Est. Scheduled</button>
+        <button class="stage-btn" data-stage="quoted">Estimate Given</button>
+        <button class="stage-btn" data-stage="booked">Job Booked</button>
+        <button class="stage-btn" data-stage="completed">Completed</button>
+      </div>
     </div>
-  </div>
 
-  <div class="detail-section">
-    <div class="detail-section-title">Est. Job Value ($)</div>
-    <input class="detail-input" id="detailValue" type="number" placeholder="0" min="0" />
-  </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Priority</div>
+      <div class="priority-btn-group">
+        <button class="priority-btn" data-priority="normal">Normal</button>
+        <button class="priority-btn" data-priority="high">🟠 High</button>
+        <button class="priority-btn" data-priority="urgent">🔴 Urgent</button>
+      </div>
+    </div>
 
-  <div class="detail-section">
-    <div class="detail-section-title">Notes</div>
-    <textarea class="detail-notes" id="detailNotes" placeholder="Add notes — what was discussed, quote given, follow-up date…"></textarea>
-    <button class="btn-save-notes" id="saveNotes">Save Notes &amp; Value</button>
-  </div>
+    <div class="detail-section">
+      <div class="detail-section-title">Est. Job Value ($)</div>
+      <input class="detail-input" id="detailValue" type="number" placeholder="0" min="0" />
+    </div>
 
-  <div class="detail-danger">
-    <button class="btn-delete" id="deleteLead">🗑 Remove Lead</button>
+    <div class="detail-section">
+      <div class="detail-section-title">Notes</div>
+      <textarea class="detail-notes" id="detailNotes" placeholder="Quote given, follow-up date, job details…"></textarea>
+      <button class="btn-save-notes" id="saveNotes">Save Notes &amp; Value</button>
+    </div>
+
+    <div class="detail-danger">
+      <button class="btn-delete" id="deleteLead">🗑 Remove Lead</button>
+    </div>
+
   </div>
 </div>
 
-<!-- ADD LEAD MODAL -->
+<!-- ═══════════════════════════════════
+     ADD LEAD MODAL
+════════════════════════════════════ -->
 <div class="modal-backdrop" id="addLeadModal">
   <div class="modal">
     <div class="modal-header">
-      <h2>Add Lead Manually</h2>
+      <h2>Add Lead</h2>
       <button class="modal-close" id="cancelAddLead">✕</button>
     </div>
     <form id="addLeadForm">
@@ -188,12 +216,12 @@
           </div>
           <div class="modal-group">
             <label>Est. Job Value ($)</label>
-            <input name="value" type="number" placeholder="0" min="0" />
+            <input name="value" type="number" placeholder="0" min="0" inputmode="numeric" />
           </div>
         </div>
         <div class="modal-row">
           <div class="modal-group">
-            <label>Service Needed</label>
+            <label>Service</label>
             <select name="service">
               <option value="Tree Removal">Tree Removal</option>
               <option value="Tree Trimming">Tree Trimming</option>
@@ -210,13 +238,12 @@
               <option value="Phone Call">Phone Call</option>
               <option value="Website Form">Website Form</option>
               <option value="Referral">Referral</option>
-              <option value="Chat Widget">Chat Widget</option>
               <option value="Manual Entry">Manual Entry</option>
             </select>
           </div>
         </div>
         <div class="modal-group">
-          <label>Notes / Job Details</label>
+          <label>Notes</label>
           <textarea name="message" placeholder="Job details, address, anything relevant…"></textarea>
         </div>
       </div>
@@ -234,12 +261,12 @@
     document.getElementById('addLeadModal').classList.remove('open');
     document.getElementById('addLeadForm').reset();
   });
-  // Close detail panel on backdrop click
-  document.addEventListener('click', e => {
-    const panel = document.getElementById('detailPanel');
-    if (panel?.classList.contains('open') && !panel.contains(e.target) && !e.target.closest('.lead-card')) {
-      panel.classList.remove('open');
-    }
+  document.getElementById('fabAddBtn').addEventListener('click', () => {
+    document.getElementById('addLeadModal').classList.add('open');
+  });
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    sessionStorage.removeItem('crm_auth');
+    location.reload();
   });
 </script>
 </body>
