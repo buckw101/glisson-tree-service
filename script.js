@@ -173,8 +173,8 @@ document.querySelectorAll('form.quote-form, form.contact-form-main').forEach(for
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTk5ODUsImV4cCI6MjA4ODUzNTk4NX0.WhNnnEIrnqYvanK59dkJvwsaL2xGdNmk6rSRLuhXQ-8',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTk5ODUsImV4cCI6MjA4ODUzNTk4NX0.WhNnnEIrnqYvanK59dkJvwsaL2xGdNmk6rSRLuhXQ-8',
+          'apikey': 'sb_publishable_YQO_ZljWCubOqvMpHylkFw_hnnmPPsA',
+          'Authorization': 'Bearer sb_publishable_YQO_ZljWCubOqvMpHylkFw_hnnmPPsA',
           'Prefer': 'return=minimal'
         },
         body: JSON.stringify(lead)
