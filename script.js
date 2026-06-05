@@ -156,9 +156,13 @@ document.querySelectorAll('form.quote-form, form.contact-form-main').forEach(for
     btn.disabled = true;
 
     try {
-      // FORMSUBMIT INTEGRATION POINT — change action attr on <form> to:
-      // action="https://formsubmit.co/YOUR_EMAIL" method="POST"
-      await new Promise(r => setTimeout(r, 1400));
+      const data = new FormData(form);
+      const res = await fetch('https://formsubmit.co/ajax/codyleeglisson94@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      if (!res.ok) throw new Error('Network error');
       form.style.display = 'none';
       if (successEl) successEl.classList.add('show');
       else { btn.innerHTML = '✓ Request Sent!'; btn.style.background = 'var(--forest)'; }
