@@ -156,13 +156,37 @@ document.querySelectorAll('form.quote-form, form.contact-form-main').forEach(for
     btn.disabled = true;
 
     try {
-      const data = new FormData(form);
-      const res = await fetch('https://formsubmit.co/ajax/codyleeglisson94@gmail.com', {
+      const fd = new FormData(form);
+      const obj = Object.fromEntries(fd.entries());
+      const lead = {
+        name:    obj.name    || obj['full-name'] || '',
+        phone:   obj.phone   || '',
+        email:   obj.email   || '',
+        service: obj.service || obj.situation || '',
+        message: obj.details || obj.message || obj.description || '',
+        source:  'Website Form',
+        stage:   'new',
+      };
+
+      // Insert into Supabase
+      await fetch('https://mlpwadopeqisrgflqwbi.supabase.co/rest/v1/glisson_leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTk5ODUsImV4cCI6MjA4ODUzNTk4NX0.WhNnnEIrnqYvanK59dkJvwsaL2xGdNmk6rSRLuhXQ-8',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTk5ODUsImV4cCI6MjA4ODUzNTk4NX0.WhNnnEIrnqYvanK59dkJvwsaL2xGdNmk6rSRLuhXQ-8',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(lead)
+      });
+
+      // Also send email via FormSubmit
+      fetch('https://formsubmit.co/ajax/codyleeglisson94@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
-        body: data
+        body: fd
       });
-      if (!res.ok) throw new Error('Network error');
+
       form.style.display = 'none';
       if (successEl) successEl.classList.add('show');
       else { btn.innerHTML = '✓ Request Sent!'; btn.style.background = 'var(--forest)'; }
