@@ -132,6 +132,7 @@ input, select, textarea { font-family: inherit; }
 .crm-brand-name {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.88rem; font-weight: 800; color: #fff;
+  white-space: nowrap;
 }
 .crm-header-right { display: flex; align-items: center; gap: 0.5rem; }
 .crm-search-wrap {
@@ -300,7 +301,7 @@ input, select, textarea { font-family: inherit; }
 .pipeline-board::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
 .stage-col {
-  min-width: 210px; flex: 1;
+  min-width: 160px; flex: 1;
   display: flex; flex-direction: column;
   border-right: 1px solid var(--border);
   background: var(--bg);
@@ -634,7 +635,9 @@ input, select, textarea { font-family: inherit; }
   .detail-call-btn { padding: 1rem; font-size: 0.95rem; }
 
   /* Search input narrower on small screens */
-  .crm-search-wrap input { width: 90px; }
+  .crm-search-wrap input { width: 70px; font-size: 0.78rem; }
+  .crm-search-wrap { padding: 0.35rem 0.6rem; }
+  .btn-refresh { display: none; }
 
   /* Modal full-width on mobile */
   .modal { border-radius: 18px 18px 0 0; max-width: 100%; }
