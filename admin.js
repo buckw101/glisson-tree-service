@@ -3,7 +3,7 @@
    ================================================ */
 
 const SUPABASE_URL = 'https://mlpwadopeqisrgflqwbi.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3Mjk1OTk4NSwiZXhwIjoyMDg4NTM1OTg1fQ.D0cuBIyE5ez9IdPgSKPJEoMH35ZMaCILvbNZXY7Wfeo';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1scHdhZG9wZXFpc3JnZmxxd2JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NTk5ODUsImV4cCI6MjA4ODUzNTk4NX0.WhNnnEIrnqYvanK59dkJvwsaL2xGdNmk6rSRLuhXQ-8';
 const CRM_PASSWORD = 'Glisson2026';
 
 const STAGES = [
