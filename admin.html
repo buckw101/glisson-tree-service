@@ -274,7 +274,7 @@
     document.getElementById('addLeadModal').classList.add('open');
   });
   document.getElementById('logoutBtn')?.addEventListener('click', () => {
-    sessionStorage.removeItem('crm_auth');
+    localStorage.removeItem('crm_auth');
     location.reload();
   });
 </script>

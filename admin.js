@@ -86,7 +86,7 @@ function initLogin() {
   const loginBtn    = document.getElementById('loginBtn');
   const loginError  = document.getElementById('loginError');
 
-  if (sessionStorage.getItem('crm_auth') === '1') {
+  if (localStorage.getItem('crm_auth') === '1') {
     loginScreen.style.display = 'none';
     dashboard.classList.add('visible');
     initDashboard();
@@ -95,7 +95,7 @@ function initLogin() {
 
   function attempt() {
     if (pwInput.value === CRM_PASSWORD) {
-      sessionStorage.setItem('crm_auth', '1');
+      localStorage.setItem('crm_auth', '1');
       loginScreen.style.display = 'none';
       dashboard.classList.add('visible');
       initDashboard();
