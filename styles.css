@@ -181,10 +181,12 @@ p  { font-size: 1rem; color: #4a5249; line-height: 1.7; }
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  position: relative;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   z-index: 1001;
   transition: var(--transition);
 }
+.ann-bar.bar-up { transform: translateY(-100%); pointer-events: none; }
 .ann-bar a { color: var(--bark-light); text-decoration: underline; text-underline-offset: 2px; }
 .ann-bar-inner {
   max-width: 1280px;
@@ -226,7 +228,6 @@ p  { font-size: 1rem; color: #4a5249; line-height: 1.7; }
   backdrop-filter: blur(12px);
   padding: 0.65rem 0;
   box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-  top: 0 !important;
 }
 .nav-inner {
   max-width: 1280px; margin: 0 auto;

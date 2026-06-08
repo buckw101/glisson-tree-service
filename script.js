@@ -18,11 +18,17 @@ annDismiss?.addEventListener('click', () => {
 // ── Navigation scroll ──
 const hasHero = !!document.querySelector('.hero');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 60 || !hasHero) {
-    nav?.classList.add('scrolled');
-  } else {
-    nav?.classList.remove('scrolled');
-  }
+  const sy = window.scrollY;
+  const annActive = annBar && !annBar.classList.contains('hidden');
+  const annH = annActive ? (annBar.offsetHeight || 32) : 0;
+
+  // Slide ann-bar up once user scrolls past it; slide nav to follow
+  const pastAnn = sy > annH;
+  if (annActive) annBar.classList.toggle('bar-up', pastAnn);
+  nav?.classList.toggle('ann-visible', !pastAnn && annH > 0);
+
+  // Solid background once scrolled 60px or on non-hero pages
+  nav?.classList.toggle('scrolled', sy > 60 || !hasHero);
 });
 if (!hasHero) nav?.classList.add('scrolled');
 
