@@ -1077,6 +1077,10 @@ p  { font-size: 1rem; color: #4a5249; line-height: 1.7; }
   flex-wrap: wrap; gap: 0.75rem;
 }
 .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.75rem; }
+.dev-credit { max-width: 1280px; margin: 0 auto; text-align: center; padding-top: 0.75rem; }
+.dev-credit p { font-size: 0.68rem; color: rgba(255,255,255,0.25); }
+.dev-credit a { color: rgba(255,255,255,0.5); font-weight: 700; text-decoration: none; }
+.dev-credit a:hover { color: var(--forest-bright); }
 .footer-links { display: flex; gap: 1.25rem; }
 .footer-links a { color: rgba(255,255,255,0.35); font-size: 0.75rem; transition: var(--transition); }
 .footer-links a:hover { color: rgba(255,255,255,0.65); }
